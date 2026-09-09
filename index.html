@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Minara Motion Archive</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="回到顶部">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span>MINARA MOTION ARCHIVE</span>
+    </a>
+    <div class="top-actions">
+      <button class="quiet-button" id="themeButton" type="button">切换主题</button>
+      <a class="quiet-button" href="https://github.com/Antoniaiaiaiaia/minara-feature-videos" target="_blank" rel="noreferrer">原始仓库</a>
+    </div>
+  </header>
+
+  <main id="top" class="shell">
+    <aside class="sidebar" aria-label="项目筛选">
+      <p class="section-label">项目</p>
+      <nav id="projectFilters" class="project-filters"></nav>
+      <section class="sidebar-note">
+        <h2>如何复用</h2>
+        <p>先播放和筛选。找到镜头后，复制复用指令交给 Codex，或直接复制源码路径。</p>
+      </section>
+    </aside>
+
+    <section class="content">
+      <header class="intro">
+        <div>
+          <h1>全镜头总览</h1>
+          <p>浏览 Minara 视频工程中的成片镜头、历史版本和对应源码。</p>
+        </div>
+        <dl class="stats" id="stats"></dl>
+      </header>
+
+      <div class="toolbar" aria-label="镜头工具栏">
+        <label class="search-wrap">
+          <span>搜索</span>
+          <input id="searchInput" type="search" placeholder="输入场景、项目或文件名" autocomplete="off">
+          <kbd>⌘ K</kbd>
+        </label>
+        <div class="view-switch" role="group" aria-label="版本显示">
+          <button class="active" type="button" data-view="latest">最新镜头</button>
+          <button type="button" data-view="all">全部版本</button>
+        </div>
+      </div>
+
+      <div class="result-line">
+        <p id="resultCount" aria-live="polite"></p>
+        <button class="text-button" id="clearButton" type="button">清除筛选</button>
+      </div>
+
+      <div id="gallery" class="gallery" aria-live="polite"></div>
+      <div id="emptyState" class="empty" hidden>
+        <h2>没有找到匹配镜头</h2>
+        <p>试试缩短关键词，或切换到全部版本。</p>
+      </div>
+    </section>
+  </main>
+
+  <div class="selection-bar" id="selectionBar" hidden>
+    <span id="selectionCount">已选 0 个镜头</span>
+    <div>
+      <button type="button" id="copySelected">复制复用指令</button>
+      <button class="quiet-button" type="button" id="clearSelected">清空</button>
+    </div>
+  </div>
+
+  <dialog id="previewDialog" class="preview-dialog">
+    <div class="dialog-head">
+      <div>
+        <p id="dialogProject"></p>
+        <h2 id="dialogTitle"></h2>
+      </div>
+      <button class="quiet-button" id="closeDialog" type="button">关闭</button>
+    </div>
+    <div class="dialog-media"><video id="dialogVideo" controls playsinline></video></div>
+    <div class="dialog-meta" id="dialogMeta"></div>
+    <div class="dialog-actions">
+      <button id="dialogCopyPrompt" type="button">复制复用指令</button>
+      <button class="quiet-button" id="dialogCopySource" type="button">复制源码路径</button>
+      <button class="quiet-button" id="dialogCopyVideo" type="button">复制视频路径</button>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
